@@ -1,44 +1,17 @@
 import React from 'react';
+import Header from './header/Header';
+import Main from './main/Main';
+import Footer from './footer/Footer';
 
 function App() {
   return (
     <>
       <div className="page">
+        <Header />
+        <Main />
+        <Footer />
 
-        {/* Начало блока header */}
 
-        <header className="header">
-          <div className="header__logo"></div>
-        </header>
-        {/* Начало блока content */}
-
-        <main className="content">
-          <section className="profile">
-            <div className="profile__avatar">
-              <div className="profile__edit-avatar">
-                <button className="profile__edit-avatar-button" type="button" aria-label="Изменить аватар"></button>
-              </div>
-            </div>
-            <div className="profile__info">
-              <div className="profile__name-container">
-                <h1 className="profile__name">Жак-Ив Кусто</h1>
-                <button className="profile__edit-button" type="button" aria-label="Редактировать"></button>
-              </div>
-              <p className="profile__job">Исследователь океана</p>
-            </div>
-            <button className="profile__add-button" type="button" aria-label="Добавить"></button>
-          </section>
-          <section className="elements" aria-label="Места">
-            <ul className="elements__container">
-            </ul>
-          </section>
-        </main>
-
-        {/* Начало блока footer */}
-
-        <footer className="footer">
-          <p className="footer__copyright">© 2020 Mesto Russia</p>
-        </footer>
         <div className="popup popup_handle_profile">
           <div className="popup__container">
             <button className="popup__close" type="button" aria-label="Закрыть"></button>
