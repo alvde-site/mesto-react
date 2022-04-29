@@ -54,6 +54,7 @@ function App() {
           title="Редактировать профиль"
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
+          buttonText="Сохранить"
         >
           <label for="profilename" className="form__field">
             <input id="profilename" type="text" className="form__input form__input_profile_name" name="profilename" placeholder="Введите имя" required minlength="2" maxlength="40" />
@@ -69,6 +70,7 @@ function App() {
           title="Новое место"
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
+          buttonText="Сохранить"
         >
           <label for="addname" className="form__field">
             <input id="addname" type="text" className="form__input form__input_add_name" name="name" placeholder="Название" required minlength="2" maxlength="30" />
@@ -79,12 +81,13 @@ function App() {
             <span id="error-addlink" className="form__input-error"></span>
           </label>
         </PopupWithForm>
-        <PopupWithForm name="remove-confirm" title="Вы уверены?"></PopupWithForm>
+        <PopupWithForm name="remove-confirm" title="Вы уверены?" buttonText="Да"></PopupWithForm>
         <PopupWithForm
           name="edit-avatar"
           title="Обновить аватар"
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
+          buttonText="Сохранить"
         >
           <label for="addavatar" className="form__field">
             <input id="addavatar" type="url" className="form__input form__input_add_link" name="link" placeholder="Ссылка на картинку" required />
