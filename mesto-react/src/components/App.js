@@ -9,6 +9,13 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState({});
+
+  function handleCardClick(cardData) {
+    cardData.isOpen = true;
+    console.log(cardData)
+    setSelectedCard(cardData);
+  }
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -26,6 +33,7 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditProfilePopupOpen(false);
+    setSelectedCard(false);
   }
 
 
@@ -39,6 +47,7 @@ function App() {
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
           onEditAvatar={handleEditAvatarClick}
+          onCardClick={handleCardClick}
         />
         <Footer />
         <PopupWithForm
@@ -83,21 +92,8 @@ function App() {
             <span id="error-addavatar" className="form__input-error"></span>
           </label>
         </PopupWithForm>
-        <ImagePopup />
+        <ImagePopup card={selectedCard} onClose={closeAllPopups} name="image-viewing"/>
       </div>
-      {/*<template id="element_template">
-        <li className="element">
-          <button className="element__remove-button" type="button" aria-label="Удалить"></button>
-          <img src="#" alt="#" className="element__img" />
-            <div className="element__description">
-              <h2 className="element__description-text"></h2>
-              <div className="element__like-block">
-                <button className="element__like-button" type="button" aria-label="Понравилось"></button>
-                <span className="element__like-count">0</span>
-              </div>
-            </div>
-        </li>
-      </template>*/}
     </>
   );
 }
