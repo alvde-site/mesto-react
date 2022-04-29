@@ -61,7 +61,7 @@ function Main(props) {
                     <h2 className="element__description-text">{card.name}</h2>
                     <div className="element__like-block">
                       <button className="element__like-button" type="button" aria-label="Понравилось"></button>
-                      <span className="element__like-count">{card.likes.length}</span>
+                      <span className="element__like-count">{card.likes}</span>
                     </div>
                   </div>
                 </li>)
