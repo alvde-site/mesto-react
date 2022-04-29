@@ -3,6 +3,7 @@ import Header from './header/Header';
 import Main from './main/Main';
 import Footer from './footer/Footer';
 import PopupWithForm from './popupWithForm/PopupWithForm';
+import ImagePopup from './imagePopup/ImagePopup';
 
 function App() {
   return (
@@ -38,18 +39,7 @@ function App() {
             <span id="error-addavatar" className="form__input-error"></span>
           </label>
         </PopupWithForm>
-
-        {/*
-        <div className="popup popup_handle_image-viewing">
-          <div className="image-viewing">
-            <button className="popup__close" type="button" aria-label="Закрыть"></button>
-            <figure className="image-viewing__img-card">
-              <img src="#" alt="#" className="image-viewing__image" />
-                <figcaption className="image-viewing__caption"></figcaption>
-            </figure>
-          </div>
-        </div>
-        */}
+        <ImagePopup />
       </div>
       {/*<template id="element_template">
         <li className="element">
