@@ -26,7 +26,8 @@ function Main(props) {
             likes: cardData.likes.length,
             link: cardData.link,
             name: cardData.name,
-            isOpen: false
+            isOpen: false,
+            id: cardData._id
           }
         })
         setCards(formattedData);
@@ -57,7 +58,7 @@ function Main(props) {
             {
               cards.map((card) => {
                 return (
-                  <Card card={card} onCardClick={props.onCardClick}/>
+                  <Card card={card} onCardClick={props.onCardClick} key={card.id}/>
                 )
               })
             }
