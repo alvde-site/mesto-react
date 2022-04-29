@@ -13,7 +13,6 @@ function App() {
 
   function handleCardClick(cardData) {
     cardData.isOpen = true;
-    console.log(cardData)
     setSelectedCard(cardData);
   }
 
