@@ -12,11 +12,11 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
-  const [currentUser, setCurrentUser] = useState("");
+  const [currentUser, setCurrentUser] = useState({});
 
   useEffect(() => {
     ApiSet.getUserInfo().then((res) => {
-      setCurrentUser("");
+      setCurrentUser(res);
     });
   }, []);
 
