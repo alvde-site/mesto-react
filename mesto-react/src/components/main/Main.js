@@ -11,11 +11,13 @@ function Main(props) {
     ApiSet.getInitialCards().then((res) => {
       const formattedData = res.map((cardData) => {
         return {
-          likes: cardData.likes.length,
+          likes: cardData.likes,
+          likesCount: cardData.likes.length,
           link: cardData.link,
           name: cardData.name,
           isOpen: false,
           id: cardData._id,
+          ownerId: cardData.owner._id
         };
       });
       setCards(formattedData);
