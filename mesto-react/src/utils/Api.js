@@ -1,5 +1,5 @@
 class Api {
-  constructor({baseUrl, headers}) {
+  constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
     this._headers = headers;
     this._authorization = this._headers.authorization;
@@ -7,92 +7,98 @@ class Api {
 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
-        headers: {
-          authorization: this._authorization
-        }
-      }
-    ).then(this._checkResponse)
+      headers: {
+        authorization: this._authorization,
+      },
+    }).then(this._checkResponse);
   }
 
   getUserInfo() {
-    return fetch(
-      `${this._baseUrl}/users/me`, {
-        headers: {
-          authorization: this._authorization
-        }
-      }
-    ).then(this._checkResponse)
+    return fetch(`${this._baseUrl}/users/me`, {
+      headers: {
+        authorization: this._authorization,
+      },
+    }).then(this._checkResponse);
   }
 
-  editUserInfo({profilename, profilejob}) {
+  editUserInfo({ profilename, profilejob }) {
     return fetch(`${this._baseUrl}/users/me`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         name: profilename,
-        about: profilejob
-      })
-    }).then(this._checkResponse)
+        about: profilejob,
+      }),
+    }).then(this._checkResponse);
   }
 
-  addCard({name, link}) {
+  addCard({ name, link }) {
     return fetch(`${this._baseUrl}/cards`, {
-      method: 'POST',
+      method: "POST",
       headers: {
         authorization: this._authorization,
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         name: name,
-        link: link
-      })
-    }).then(this._checkResponse)
+        link: link,
+      }),
+    }).then(this._checkResponse);
   }
 
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
-        authorization: this._authorization
-      }
-    }).then(this._checkResponse)
+        authorization: this._authorization,
+      },
+    }).then(this._checkResponse);
   }
 
   addLike(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        authorization: this._authorization
-      }
-    }).then(this._checkResponse)
+        authorization: this._authorization,
+      },
+    }).then(this._checkResponse);
   }
 
   removeLike(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
-        authorization: this._authorization
-      }
-    }).then(this._checkResponse)
+        authorization: this._authorization,
+      },
+    }).then(this._checkResponse);
   }
 
-  changeLikeCardStatus(cardId, isLiked) {
-    return fetch(`${this._baseUrl}/cards`, {
-      headers: {
-        authorization: this._authorization
-      }
+  changeLikeCardStatus(cardId, notLiked) {
+    if (notLiked) {
+      return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+        method: "PUT",
+        headers: {
+          authorization: this._authorization,
+        },
+      }).then(this._checkResponse);
+    } else {
+      return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+        method: "DELETE",
+        headers: {
+          authorization: this._authorization,
+        },
+      }).then(this._checkResponse);
     }
-  ).then(this._checkResponse)
   }
 
-  editAvatarInfo({link}) {
+  editAvatarInfo({ link }) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        avatar: link
-      })
-    }).then(this._checkResponse)
+        avatar: link,
+      }),
+    }).then(this._checkResponse);
   }
 
   _checkResponse(res) {
@@ -101,9 +107,9 @@ class Api {
 }
 
 export const ApiSet = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-39',
+  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-39",
   headers: {
-    authorization: '21b633d6-0242-4229-923c-a9cd21579f97',
-    'Content-Type': 'application/json'
-  }
+    authorization: "21b633d6-0242-4229-923c-a9cd21579f97",
+    "Content-Type": "application/json",
+  },
 });
