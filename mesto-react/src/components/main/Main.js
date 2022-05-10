@@ -11,6 +11,9 @@ function Main(props) {
     ApiSet.getInitialCards().then((res) => {
       const formattedData = res.map((cardData) => {
         return {
+          ...cardData, isOpen: false
+        };
+        /*return {
           likes: cardData.likes,
           likesCount: cardData.likes.length,
           link: cardData.link,
@@ -18,7 +21,7 @@ function Main(props) {
           isOpen: false,
           id: cardData._id,
           ownerId: cardData.owner._id
-        };
+        };*/
       });
       setCards(formattedData);
     });
@@ -63,7 +66,7 @@ function Main(props) {
         <ul className="elements__container">
           {cards.map((card) => {
             return (
-              <Card card={card} onCardClick={props.onCardClick} key={card.id} />
+              <Card card={card} onCardClick={props.onCardClick} key={card._id} />
             );
           })}
         </ul>

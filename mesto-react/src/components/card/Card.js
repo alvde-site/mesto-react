@@ -3,8 +3,8 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function Card(props) {
   const currentUser = useContext(CurrentUserContext);
-  // Определяем, являемся ли мы владельцем текущей карточки
-  const isOwn = props.card.ownerId === currentUser._id;
+  // Определяем, являемся ли мы владельцем текущей карточкиp
+  const isOwn = props.card.owner._id === currentUser._id;
   // Создаём переменную, которую после зададим в `className` для кнопки удаления
   const cardDeleteButtonClassName = `element__remove-button ${
     !isOwn && "element__remove-button_hidden"
@@ -41,7 +41,7 @@ function Card(props) {
             type="button"
             aria-label="Понравилось"
           ></button>
-          <span className="element__like-count">{props.card.likesCount}</span>
+          <span className="element__like-count">{props.card.likes.length}</span>
         </div>
       </div>
     </li>
