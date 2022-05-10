@@ -152,7 +152,6 @@ function App() {
           name="image-viewing"
         />
       </div>
-      <Main />
     </CurrentUserContext.Provider>
   );
 }
