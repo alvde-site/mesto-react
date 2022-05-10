@@ -14,10 +14,14 @@ function Main(props) {
     // Отправляем запрос в API и получаем обновлённые данные карточки
     ApiSet.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+    })
+    .catch((err) => {
+      console.log(`${err}`);
     });
 }
 
   useEffect(() => {
+
     ApiSet.getInitialCards().then((res) => {
       const formattedData = res.map((cardData) => {
         return {
@@ -25,6 +29,9 @@ function Main(props) {
         };
       });
       setCards(formattedData);
+    })
+    .catch((err) => {
+      console.log(`${err}`);
     });
   }, []);
 
