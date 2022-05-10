@@ -20,6 +20,10 @@ function Card(props) {
     props.onCardClick(props.card);
   }
 
+  function handleLikeClick() {
+    props.onCardLike(props.card);
+  }
+
   return (
     <li className="element">
       <button
@@ -40,6 +44,7 @@ function Card(props) {
             className={cardLikeButtonClassName}
             type="button"
             aria-label="Понравилось"
+            onClick={handleLikeClick}
           ></button>
           <span className="element__like-count">{props.card.likes.length}</span>
         </div>

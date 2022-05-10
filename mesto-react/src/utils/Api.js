@@ -76,6 +76,15 @@ class Api {
     }).then(this._checkResponse)
   }
 
+  changeLikeCardStatus(cardId, isLiked) {
+    return fetch(`${this._baseUrl}/cards`, {
+      headers: {
+        authorization: this._authorization
+      }
+    }
+  ).then(this._checkResponse)
+  }
+
   editAvatarInfo({link}) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
