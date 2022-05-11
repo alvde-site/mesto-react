@@ -28,6 +28,12 @@ function App() {
     });
   }
 
+  function handleUpdateAvatar({avatar}) {
+    ApiSet.editAvatarInfo({avatar}).then((res) => {
+      setCurrentUser(res);
+    });
+  }
+
   function handleCardClick(cardData) {
     cardData.isOpen = true;
     setSelectedCard(cardData);
@@ -65,7 +71,7 @@ function App() {
         />
         <Footer />
         <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
-        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
+        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}/>
         <PopupWithForm
           name="add-element"
           title="Новое место"
