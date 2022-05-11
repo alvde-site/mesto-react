@@ -21,6 +21,12 @@ function App() {
     });
   }, []);
 
+  function handleUpdateUser({name, about}) {
+    ApiSet.editUserInfo({name, about}).then((res) => {
+      setCurrentUser(res);
+    });
+  }
+
   function handleCardClick(cardData) {
     cardData.isOpen = true;
     setSelectedCard(cardData);
@@ -57,7 +63,7 @@ function App() {
           onCardClick={handleCardClick}
         />
         <Footer />
-        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
+        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
         <PopupWithForm
           name="add-element"
           title="Новое место"
