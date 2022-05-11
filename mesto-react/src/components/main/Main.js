@@ -48,8 +48,8 @@ function Main(props) {
                 card={card}
                 onCardClick={props.onCardClick}
                 key={card._id}
-                onCardLike={props.handleCardLike}
-                onCardDelete={props.handleCardDelete}
+                onCardLike={props.onCardLike}
+                onCardDelete={props.onCardDelete}
               />
             );
           })}

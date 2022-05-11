@@ -8,6 +8,7 @@ import { ApiSet } from "../utils/Api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup/EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup/EditAvatarPopup";
+import AddPlacePopup from "./AddPlacePopup/AddPlacePopup";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -63,6 +64,13 @@ function App() {
       .catch((err) => {
         console.log(`${err}`);
       });
+  }
+
+  function handleUpdatePlace({name, link}) {
+    console.log(`${name}, ${link}`)
+   // ApiSet.addCard({place, link}).then((res) => {
+      //setCurrentUser(res);
+    //});
   }
 
   function handleUpdateUser({ name, about }) {
@@ -126,38 +134,11 @@ function App() {
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
         />
-        <PopupWithForm
-          name="add-element"
-          title="Новое место"
-          isOpen={isAddPlacePopupOpen}
-          onClose={closeAllPopups}
-          buttonText="Сохранить"
-        >
-          <label for="addname" className="form__field">
-            <input
-              id="addname"
-              type="text"
-              className="form__input form__input_add_name"
-              name="name"
-              placeholder="Название"
-              required
-              minlength="2"
-              maxlength="30"
-            />
-            <span id="error-addname" className="form__input-error"></span>
-          </label>
-          <label for="addlink" className="form__field">
-            <input
-              id="addlink"
-              type="url"
-              className="form__input form__input_add_link"
-              name="link"
-              placeholder="Ссылка на картинку"
-              required
-            />
-            <span id="error-addlink" className="form__input-error"></span>
-          </label>
-        </PopupWithForm>
+        <AddPlacePopup
+        isOpen={isAddPlacePopupOpen}
+        onClose={closeAllPopups}
+        onUpdatePlace={handleUpdatePlace}
+        />
         <PopupWithForm
           name="remove-confirm"
           title="Вы уверены?"
