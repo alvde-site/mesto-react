@@ -2,26 +2,26 @@ import { useState, useEffect, useContext } from "react";
 import PopupWithForm from "../popupWithForm/PopupWithForm";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function EditProfilePopup(props) {
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+function EditAvatarPopup(props) {
+  //const [name, setName] = useState("");
+  //const [description, setDescription] = useState("");
   // Подписка на контекст
-  const currentUser = useContext(CurrentUserContext);
+  //const currentUser = useContext(CurrentUserContext);
   // После загрузки текущего пользователя из API
   // его данные будут использованы в управляемых компонентах.
-  useEffect(() => {
+  /*useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
   }, [currentUser]);
   function handleNameChange(e) {
     setName(e.target.value);
-  }
+  }*/
 
-  function handleDescriptionChange(e) {
+  /*function handleDescriptionChange(e) {
     setDescription(e.target.value);
-  }
+  }*/
 
-  function handleSubmit(e) {
+  /*function handleSubmit(e) {
     // Запрещаем браузеру переходить по адресу формы
     e.preventDefault();
 
@@ -30,10 +30,30 @@ function EditProfilePopup(props) {
       name,
       about: description,
     });
-  }
+  }*/
 
   return (
-      <PopupWithForm
+    <>
+    <PopupWithForm
+          name="edit-avatar"
+          title="Обновить аватар"
+          isOpen={props.isOpen}
+          onClose={props.onClose}
+          buttonText="Сохранить"
+        >
+          <label for="addavatar" className="form__field">
+            <input
+              id="addavatar"
+              type="url"
+              className="form__input form__input_add_link"
+              name="link"
+              placeholder="Ссылка на картинку"
+              required
+            />
+            <span id="error-addavatar" className="form__input-error"></span>
+          </label>
+        </PopupWithForm>
+      {/*<PopupWithForm
         name="profile"
         title="Редактировать профиль"
         isOpen={props.isOpen}
@@ -71,8 +91,9 @@ function EditProfilePopup(props) {
           />
           <span id="error-profilejob" className="form__input-error"></span>
         </label>
-      </PopupWithForm>
+  </PopupWithForm>*/}
+    </>
   );
 }
 
-export default EditProfilePopup;
+export default EditAvatarPopup;

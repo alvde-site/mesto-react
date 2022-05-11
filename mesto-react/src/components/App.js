@@ -7,6 +7,7 @@ import ImagePopup from "./imagePopup/ImagePopup";
 import { ApiSet } from "../utils/Api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup/EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup/EditAvatarPopup";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -64,6 +65,7 @@ function App() {
         />
         <Footer />
         <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
+        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
         <PopupWithForm
           name="add-element"
           title="Новое место"
@@ -101,25 +103,6 @@ function App() {
           title="Вы уверены?"
           buttonText="Да"
         ></PopupWithForm>
-        <PopupWithForm
-          name="edit-avatar"
-          title="Обновить аватар"
-          isOpen={isEditAvatarPopupOpen}
-          onClose={closeAllPopups}
-          buttonText="Сохранить"
-        >
-          <label for="addavatar" className="form__field">
-            <input
-              id="addavatar"
-              type="url"
-              className="form__input form__input_add_link"
-              name="link"
-              placeholder="Ссылка на картинку"
-              required
-            />
-            <span id="error-addavatar" className="form__input-error"></span>
-          </label>
-        </PopupWithForm>
         <ImagePopup
           card={selectedCard}
           onClose={closeAllPopups}
