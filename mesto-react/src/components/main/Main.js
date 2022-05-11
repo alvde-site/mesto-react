@@ -20,7 +20,13 @@ function Main(props) {
 }
 
 function handleCardDelete(card) {
-  console.log(card)
+  //console.log(card._id);
+  ApiSet.deleteCard(card._id).then(() => {
+    setCards((state) => state.filter((c) => c._id !== card._id ));
+})
+.catch((err) => {
+  console.log(`${err}`);
+});;
 }
 
   useEffect(() => {
