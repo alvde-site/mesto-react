@@ -1,47 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
-import { ApiSet } from "../../utils/Api";
+import { useContext } from "react";
 import Card from "../card/Card";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function Main(props) {
-  const [cards, setCards] = useState([]);
   const currentUser = useContext(CurrentUserContext);
-
-  function handleCardLike(card) {
-    // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
-
-    ApiSet.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-    })
-    .catch((err) => {
-      console.log(`${err}`);
-    });
-}
-
-function handleCardDelete(card) {
-  //console.log(card._id);
-  ApiSet.deleteCard(card._id).then(() => {
-    setCards((state) => state.filter((c) => c._id !== card._id ));
-})
-.catch((err) => {
-  console.log(`${err}`);
-});;
-}
-
-  useEffect(() => {
-    ApiSet.getInitialCards().then((res) => {
-      const formattedData = res.map((cardData) => {
-        return {
-          ...cardData, isOpen: false
-        };
-      });
-      setCards(formattedData);
-    })
-    .catch((err) => {
-      console.log(`${err}`);
-    });
-  }, []);
 
   return (
     <main className="content">
@@ -80,9 +42,15 @@ function handleCardDelete(card) {
       </section>
       <section className="elements" aria-label="Места">
         <ul className="elements__container">
-          {cards.map((card) => {
+          {props.cards.map((card) => {
             return (
-              <Card card={card} onCardClick={props.onCardClick} key={card._id} onCardLike={handleCardLike} onCardDelete={handleCardDelete}/>
+              <Card
+                card={card}
+                onCardClick={props.onCardClick}
+                key={card._id}
+                onCardLike={props.handleCardLike}
+                onCardDelete={props.handleCardDelete}
+              />
             );
           })}
         </ul>
