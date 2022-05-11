@@ -32,7 +32,7 @@ class Api {
     }).then(this._checkResponse);
   }
 
-  addCard({ place, link }) {
+  addCard({ name, link }) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: {
@@ -40,7 +40,7 @@ class Api {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: place,
+        name: name,
         link: link,
       }),
     }).then(this._checkResponse);

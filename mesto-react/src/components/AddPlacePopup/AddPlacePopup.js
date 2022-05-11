@@ -1,22 +1,21 @@
-import { useState, useEffect, useContext } from "react";
+import { useState/*, useEffect, useContext*/ } from "react";
 import PopupWithForm from "../popupWithForm/PopupWithForm";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+//import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function AddPlacePopup(props) {
   const [place, setPlace] = useState("");
   const [link, setLink] = useState("");
   // Подписка на контекст
-  const currentUser = useContext(CurrentUserContext);
+  //const currentUser = useContext(CurrentUserContext);
   // После загрузки текущего пользователя из API
   // его данные будут использованы в управляемых компонентах.
-  useEffect(() => {
-    //setPlace(currentUser.place);
-    //setLink(currentUser.link);
-   // console.log(`${currentUser.place} ${currentUser.link}`)
-  }, [currentUser]);
+ /* useEffect(() => {
+    setPlace(currentUser.place);
+    setLink(currentUser.link);
+  }, [currentUser]);*/
 
   function handlePlaceChange(e) {
-    setPlace(e.target.value);
+   setPlace(e.target.value);
   }
 
   function handleLinkChange(e) {

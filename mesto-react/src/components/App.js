@@ -56,7 +56,6 @@ function App() {
   }
 
   function handleCardDelete(card) {
-    //console.log(card._id);
     ApiSet.deleteCard(card._id)
       .then(() => {
         setCards((state) => state.filter((c) => c._id !== card._id));
@@ -66,11 +65,16 @@ function App() {
       });
   }
 
-  function handleUpdatePlace({name, link}) {
-    console.log(`${name}, ${link}`)
-   // ApiSet.addCard({place, link}).then((res) => {
-      //setCurrentUser(res);
-    //});
+  function handleAddPlaceSubmit({ name, link }) {
+    ApiSet.addCard({ name, link })
+      .then((cardData) => {
+        const newCard = {...cardData, isOpen: false};
+        //const newCards = cards.unshift(formattedData);
+        setCards([newCard, ...cards]);
+      })
+      .catch((err) => {
+        console.log(`${err}`);
+      });
   }
 
   function handleUpdateUser({ name, about }) {
@@ -135,9 +139,9 @@ function App() {
           onUpdateAvatar={handleUpdateAvatar}
         />
         <AddPlacePopup
-        isOpen={isAddPlacePopupOpen}
-        onClose={closeAllPopups}
-        onUpdatePlace={handleUpdatePlace}
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+          onUpdatePlace={handleAddPlaceSubmit}
         />
         <PopupWithForm
           name="remove-confirm"
