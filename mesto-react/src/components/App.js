@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import Header from "./header/Header";
 import Main from "./main/Main";
 import Footer from "./footer/Footer";
-import PopupWithForm from "./popupWithForm/PopupWithForm";
 import ImagePopup from "./imagePopup/ImagePopup";
 import { ApiSet } from "../utils/Api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
@@ -22,6 +21,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [place, setPlace] = useState("");
   const [link, setLink] = useState("");
+  const [isdeleteCard, setIsDeleteCard] = useState({});
 
   useEffect(() => {
     ApiSet.getInitialCards()
@@ -60,16 +60,20 @@ function App() {
       });
   }
 
-  function handleCardDelete(card) {
-    handleConfirmCardDelete();
-    /*ApiSet.deleteCard(card._id)
+  function handleConfirmCardDelete() {  //Удаление карточки через ConfirmPopup
+    ApiSet.deleteCard(isdeleteCard._id)
       .then(() => {
-        setCards((state) => state.filter((c) => c._id !== card._id));
+        setCards((state) => state.filter((c) => c._id !== isdeleteCard._id));
+        closeAllPopups();
       })
       .catch((err) => {
         console.log(`${err}`);
-      });*/
+      });
   }
+
+  //function handleCardDelete(card) {
+    //handleConfirmCardDelete(card);
+  //}
 
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
@@ -126,10 +130,6 @@ function App() {
     });
   }
 
-  function handleConfirmCardDelete() {
-    console.log('удалили')
-  }
-
   function handleCardClick(cardData) {
     cardData.isOpen = true;
     setSelectedCard(cardData);
@@ -147,9 +147,9 @@ function App() {
     setIsEditProfilePopupOpen(true);
   }
 
-  function handlePopupWithConfirmation() {
+  function handlePopupWithConfirmation(card) {  //Настраивает открытие попапа подтверждения удаления
     setIsConfirmationPopupOpen(true);
-    console.log('asdf')
+    setIsDeleteCard(card);
   }
 
 
@@ -165,8 +165,7 @@ function App() {
           onCardClick={handleCardClick}
           cards={cards}
           onCardLike={handleCardLike}
-          onCardDelete={handleCardDelete}
-          onConfirmation={handlePopupWithConfirmation}
+          onConfirmation={handlePopupWithConfirmation} //Настраивает открытие попапа подтверждения удаления
         />
         <Footer />
         <EditProfilePopup
@@ -192,7 +191,7 @@ function App() {
           setLink={setLink}
         />
         <PopupWithConfirmation
-          isOpen={isEditAvatarPopupOpen}
+          isOpen={isConfirmationPopupOpen}
           onClose={closeAllPopups}
           onConfirmDelete={handleConfirmCardDelete}
           isLoading={isLoading}

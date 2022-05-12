@@ -25,7 +25,8 @@ function Card(props) {
   }
 
   function handleDeleteClick() {
-    props.onCardDelete(props.card);
+    props.onConfirmation(props.card); //Настраивает открытие попапа подтверждения удаления
+    //props.onCardDelete(props.card);
   }
 
   return (
@@ -34,7 +35,7 @@ function Card(props) {
         className={cardDeleteButtonClassName}
         type="button"
         aria-label="Удалить"
-        onClick={props.onConfirmation}
+        onClick={handleDeleteClick}
       ></button>
       <img
         src={props.card.link}
