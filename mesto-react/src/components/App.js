@@ -64,9 +64,6 @@ function App() {
       .catch((err) => {
         console.log(`${err}`);
       })
-      .catch((err) => {
-        console.log(`${err}`);
-      })
       .finally(() => {
         setIsLoading(false);
       });
@@ -80,15 +77,13 @@ function App() {
     setIsConfirmationPopupOpen(false);
   }
 
-  function handleAddPlaceSubmit({ name, link, setPlace, setLink }) {
+  function handleAddPlaceSubmit({ name, link }) {
     setIsLoading(true);
     ApiSet.addCard({ name, link })
       .then((cardData) => {
         const newCard = { ...cardData, isOpen: false };
         setCards([newCard, ...cards]);
         closeAllPopups();
-        setPlace("");
-        setLink("");
       })
       .catch((err) => {
         console.log(`${err}`);
@@ -113,13 +108,12 @@ function App() {
       });
   }
 
-  function handleUpdateAvatar({ avatar, form }) {
+  function handleUpdateAvatar({ avatar }) {
     setIsLoading(true);
     ApiSet.editAvatarInfo({ avatar })
       .then((res) => {
         setCurrentUser(res);
         closeAllPopups();
-        form.reset();
       })
       .catch((err) => {
         console.log(`${err}`);

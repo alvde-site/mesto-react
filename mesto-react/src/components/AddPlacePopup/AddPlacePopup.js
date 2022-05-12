@@ -20,8 +20,6 @@ function AddPlacePopup(props) {
     props.onUpdatePlace({
       name: place,
       link,
-      setPlace,
-      setLink,
     });
   }
 
