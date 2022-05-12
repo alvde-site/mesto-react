@@ -60,7 +60,8 @@ function App() {
       });
   }
 
-  function handleConfirmCardDelete() {  //Удаление карточки через ConfirmPopup
+  function handleConfirmCardDelete() {
+    //Удаление карточки через ConfirmPopup
     setIsLoading(true);
     ApiSet.deleteCard(isdeleteCard._id)
       .then(() => {
@@ -73,7 +74,7 @@ function App() {
       .catch((err) => {
         console.log(`${err}`);
       })
-      .finally(()=>{
+      .finally(() => {
         setIsLoading(false);
       });
   }
@@ -90,47 +91,49 @@ function App() {
     setIsLoading(true);
     ApiSet.addCard({ name, link })
       .then((cardData) => {
-        const newCard = {...cardData, isOpen: false};
+        const newCard = { ...cardData, isOpen: false };
         setCards([newCard, ...cards]);
         closeAllPopups();
-        setPlace('');
-        setLink('');
+        setPlace("");
+        setLink("");
       })
       .catch((err) => {
         console.log(`${err}`);
       })
-      .finally(()=>{
+      .finally(() => {
         setIsLoading(false);
       });
   }
 
   function handleUpdateUser({ name, about }) {
     setIsLoading(true);
-    ApiSet.editUserInfo({ name, about }).then((res) => {
-      setCurrentUser(res);
-      closeAllPopups();
-    })
-    .catch((err) => {
-      console.log(`${err}`);
-    })
-    .finally(()=>{
-      setIsLoading(false);
-    });
+    ApiSet.editUserInfo({ name, about })
+      .then((res) => {
+        setCurrentUser(res);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(`${err}`);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }
 
   function handleUpdateAvatar({ avatar, form }) {
     setIsLoading(true);
-    ApiSet.editAvatarInfo({ avatar }).then((res) => {
-      setCurrentUser(res);
-      closeAllPopups();
-      form.reset();
-    })
-    .catch((err) => {
-      console.log(`${err}`);
-    })
-    .finally(()=>{
-      setIsLoading(false);
-    });
+    ApiSet.editAvatarInfo({ avatar })
+      .then((res) => {
+        setCurrentUser(res);
+        closeAllPopups();
+        form.reset();
+      })
+      .catch((err) => {
+        console.log(`${err}`);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }
 
   function handleCardClick(cardData) {
@@ -150,11 +153,11 @@ function App() {
     setIsEditProfilePopupOpen(true);
   }
 
-  function handlePopupWithConfirmation(card) {  //Настраивает открытие попапа подтверждения удаления
+  function handlePopupWithConfirmation(card) {
+    //Настраивает открытие попапа подтверждения удаления
     setIsConfirmationPopupOpen(true);
     setIsDeleteCard(card);
   }
-
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

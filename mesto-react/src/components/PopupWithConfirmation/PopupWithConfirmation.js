@@ -16,15 +16,15 @@ function PopupWithConfirmation(props) {
 
   return (
     <PopupWithForm
-    name="remove-confirm"
-    title="Вы уверены?"
-    isOpen={props.isOpen}
-    onClose={props.onClose}
-    onSubmit={handleSubmit}
-    isLoading={props.isLoading}
-    buttonText="Да"
-    buttonLoadingText="Удаление..."
-  ></PopupWithForm>
+      name="remove-confirm"
+      title="Вы уверены?"
+      isOpen={props.isOpen}
+      onClose={props.onClose}
+      onSubmit={handleSubmit}
+      isLoading={props.isLoading}
+      buttonText="Да"
+      buttonLoadingText="Удаление..."
+    ></PopupWithForm>
   );
 }
 
