@@ -22,24 +22,19 @@ function App() {
   const [isdeleteCard, setIsDeleteCard] = useState({});
 
   useEffect(() => {
-    ApiSet.getInitialCards()
-      .then((res) => {
-        const formattedData = res.map((cardData) => {
-          return {
-            ...cardData,
-            isOpen: false,
-          };
-        });
-        setCards(formattedData);
-      })
-      .catch((err) => {
-        console.log(`${err}`);
-      });
-  }, []);
-
-  useEffect(() => {
-    ApiSet.getUserInfo().then((res) => {
-      setCurrentUser(res);
+    Promise.all([ApiSet.getUserInfo(),ApiSet.getInitialCards()])
+    .then(([userData, cards]) => { // cards = массив объектов карточке с сервера
+     setCurrentUser(userData);
+      const formattedData = cards.map((cardData) => {
+            return {
+              ...cardData,
+              isOpen: false,
+            };
+          });
+          setCards(formattedData);
+    })
+    .catch((err) => {
+      console.log(`${err}`);
     });
   }, []);
 
