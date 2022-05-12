@@ -61,6 +61,7 @@ function App() {
   }
 
   function handleConfirmCardDelete() {  //Удаление карточки через ConfirmPopup
+    setIsLoading(true);
     ApiSet.deleteCard(isdeleteCard._id)
       .then(() => {
         setCards((state) => state.filter((c) => c._id !== isdeleteCard._id));
@@ -68,12 +69,14 @@ function App() {
       })
       .catch((err) => {
         console.log(`${err}`);
+      })
+      .catch((err) => {
+        console.log(`${err}`);
+      })
+      .finally(()=>{
+        setIsLoading(false);
       });
   }
-
-  //function handleCardDelete(card) {
-    //handleConfirmCardDelete(card);
-  //}
 
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
