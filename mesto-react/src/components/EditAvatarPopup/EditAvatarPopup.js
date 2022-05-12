@@ -14,7 +14,6 @@ function EditAvatarPopup(props) {
   }
 
   return (
-    <>
     <PopupWithForm
           name="edit-avatar"
           title="Обновить аватар"
@@ -38,7 +37,6 @@ function EditAvatarPopup(props) {
             <span id="error-addavatar" className="form__input-error"></span>
           </label>
         </PopupWithForm>
-    </>
   );
 }
 
