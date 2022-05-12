@@ -34,7 +34,7 @@ function Card(props) {
         className={cardDeleteButtonClassName}
         type="button"
         aria-label="Удалить"
-        onClick={handleDeleteClick}
+        onClick={props.onConfirmation}
       ></button>
       <img
         src={props.card.link}
