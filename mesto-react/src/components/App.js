@@ -107,9 +107,18 @@ function App() {
     });
   }
 
-  function handleUpdateAvatar({ avatar }) {
+  function handleUpdateAvatar({ avatar, form }) {
+    setIsLoading(true);
     ApiSet.editAvatarInfo({ avatar }).then((res) => {
       setCurrentUser(res);
+      closeAllPopups();
+      form.reset();
+    })
+    .catch((err) => {
+      console.log(`${err}`);
+    })
+    .finally(()=>{
+      setIsLoading(false);
     });
   }
 
@@ -155,6 +164,7 @@ function App() {
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
+          isLoading={isLoading}
         />
         <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
