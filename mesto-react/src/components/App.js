@@ -18,8 +18,9 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [place, setPlace] = useState("");
+  const [link, setLink] = useState("");
 
-  console.log(isLoading)
   useEffect(() => {
     ApiSet.getInitialCards()
       .then((res) => {
@@ -81,6 +82,8 @@ function App() {
         const newCard = {...cardData, isOpen: false};
         setCards([newCard, ...cards]);
         closeAllPopups();
+        setPlace('');
+        setLink('');
       })
       .catch((err) => {
         console.log(`${err}`);
@@ -149,6 +152,10 @@ function App() {
           onClose={closeAllPopups}
           onUpdatePlace={handleAddPlaceSubmit}
           isLoading={isLoading}
+          place={place}
+          setPlace={setPlace}
+          link={link}
+          setLink={setLink}
         />
         <PopupWithForm
           name="remove-confirm"
