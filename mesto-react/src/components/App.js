@@ -19,8 +19,6 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [place, setPlace] = useState("");
-  const [link, setLink] = useState("");
   const [isdeleteCard, setIsDeleteCard] = useState({});
 
   useEffect(() => {
@@ -87,7 +85,7 @@ function App() {
     setIsConfirmationPopupOpen(false);
   }
 
-  function handleAddPlaceSubmit({ name, link }) {
+  function handleAddPlaceSubmit({ name, link, setPlace, setLink }) {
     setIsLoading(true);
     ApiSet.addCard({ name, link })
       .then((cardData) => {
@@ -191,10 +189,6 @@ function App() {
           onClose={closeAllPopups}
           onUpdatePlace={handleAddPlaceSubmit}
           isLoading={isLoading}
-          place={place}
-          setPlace={setPlace}
-          link={link}
-          setLink={setLink}
         />
         <PopupWithConfirmation
           isOpen={isConfirmationPopupOpen}

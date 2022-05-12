@@ -1,13 +1,15 @@
-import React from "react";
+import {useEffect, useState} from "react";
 import PopupWithForm from "../popupWithForm/PopupWithForm";
 
 function AddPlacePopup(props) {
+  const [place, setPlace] = useState("");
+  const [link, setLink] = useState("");
   function handlePlaceChange(e) {
-    props.setPlace(e.target.value);
+    setPlace(e.target.value);
   }
 
   function handleLinkChange(e) {
-    props.setLink(e.target.value);
+    setLink(e.target.value);
   }
 
   function handleSubmit(e) {
@@ -16,10 +18,17 @@ function AddPlacePopup(props) {
 
     // Передаём значения управляемых компонентов во внешний обработчик
     props.onUpdatePlace({
-      name: props.place,
-      link: props.link,
+      name: place,
+      link,
+      setPlace,
+      setLink,
     });
   }
+
+  useEffect(() => {
+    setPlace('');
+    setLink('');
+  },[props.isOpen]);
 
   return (
     <PopupWithForm
@@ -42,7 +51,7 @@ function AddPlacePopup(props) {
           required
           minlength="2"
           maxlength="30"
-          value={props.place || ""}
+          value={place || ""}
           onChange={handlePlaceChange}
         />
         <span id="error-addname" className="form__input-error"></span>
@@ -55,7 +64,7 @@ function AddPlacePopup(props) {
           name="link"
           placeholder="Ссылка на картинку"
           required
-          value={props.link || ""}
+          value={link || ""}
           onChange={handleLinkChange}
         />
         <span id="error-addlink" className="form__input-error"></span>
