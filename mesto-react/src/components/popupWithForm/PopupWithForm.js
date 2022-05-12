@@ -18,7 +18,6 @@ function PopupWithForm(props) {
           action="#"
           name={`${props.name}form`}
           className="form"
-          novalidate
           onSubmit={props.onSubmit}
         >
           <h2 className="form__title">{props.title}</h2>

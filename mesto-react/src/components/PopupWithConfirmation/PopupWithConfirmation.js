@@ -1,11 +1,7 @@
-import { useContext } from "react";
+import React from "react";
 import PopupWithForm from "../popupWithForm/PopupWithForm";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function PopupWithConfirmation(props) {
-  // Подписка на контекст
-  const currentUser = useContext(CurrentUserContext);
-
   function handleSubmit(e) {
     // Запрещаем браузеру переходить по адресу формы
     e.preventDefault();
