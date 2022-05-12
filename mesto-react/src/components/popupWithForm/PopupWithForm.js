@@ -17,8 +17,8 @@ function PopupWithForm(props) {
         <form action="#" name={`${props.name}form`} className="form" novalidate onSubmit={props.onSubmit}>
           <h2 className="form__title">{props.title}</h2>
           {props.children}
-          <button className="form__submit" type="submit" onClick={props.onClose}>
-            {props.buttonText}
+          <button className="form__submit" type="submit">
+            {props.isLoading ? props.buttonLoadingText : props.buttonText}
           </button>
         </form>
       </div>

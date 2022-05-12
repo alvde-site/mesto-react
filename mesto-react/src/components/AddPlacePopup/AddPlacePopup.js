@@ -40,7 +40,9 @@ function AddPlacePopup(props) {
     isOpen={props.isOpen}
     onClose={props.onClose}
     buttonText="Сохранить"
+    buttonLoadingText="Сохранение..."
     onSubmit={handleSubmit}
+    isLoading={props.isLoading}
   >
     <label for="addname" className="form__field">
       <input

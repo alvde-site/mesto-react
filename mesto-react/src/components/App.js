@@ -17,7 +17,9 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
+  console.log(isLoading)
   useEffect(() => {
     ApiSet.getInitialCards()
       .then((res) => {
@@ -65,15 +67,26 @@ function App() {
       });
   }
 
+  function closeAllPopups() {
+    setIsEditAvatarPopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setSelectedCard(false);
+  }
+
   function handleAddPlaceSubmit({ name, link }) {
+    setIsLoading(true);
     ApiSet.addCard({ name, link })
       .then((cardData) => {
         const newCard = {...cardData, isOpen: false};
-        //const newCards = cards.unshift(formattedData);
         setCards([newCard, ...cards]);
+        closeAllPopups();
       })
       .catch((err) => {
         console.log(`${err}`);
+      })
+      .finally(()=>{
+        setIsLoading(false);
       });
   }
 
@@ -106,13 +119,6 @@ function App() {
     setIsEditProfilePopupOpen(true);
   }
 
-  function closeAllPopups() {
-    setIsEditAvatarPopupOpen(false);
-    setIsAddPlacePopupOpen(false);
-    setIsEditProfilePopupOpen(false);
-    setSelectedCard(false);
-  }
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
       {/* Поддерево, в котором будет доступен контекст */}
@@ -142,6 +148,7 @@ function App() {
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           onUpdatePlace={handleAddPlaceSubmit}
+          isLoading={isLoading}
         />
         <PopupWithForm
           name="remove-confirm"
