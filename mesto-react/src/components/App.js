@@ -94,8 +94,16 @@ function App() {
   }
 
   function handleUpdateUser({ name, about }) {
+    setIsLoading(true);
     ApiSet.editUserInfo({ name, about }).then((res) => {
       setCurrentUser(res);
+      closeAllPopups();
+    })
+    .catch((err) => {
+      console.log(`${err}`);
+    })
+    .finally(()=>{
+      setIsLoading(false);
     });
   }
 
@@ -141,6 +149,7 @@ function App() {
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
+          isLoading={isLoading}
         />
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}

@@ -1,6 +1,5 @@
 import React from "react";
 import PopupWithForm from "../popupWithForm/PopupWithForm";
-//import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function AddPlacePopup(props) {
 
@@ -29,10 +28,10 @@ function AddPlacePopup(props) {
     title="Новое место"
     isOpen={props.isOpen}
     onClose={props.onClose}
-    buttonText="Сохранить"
-    buttonLoadingText="Сохранение..."
     onSubmit={handleSubmit}
     isLoading={props.isLoading}
+    buttonText="Сохранить"
+    buttonLoadingText="Сохранение..."
   >
     <label for="addname" className="form__field">
       <input
