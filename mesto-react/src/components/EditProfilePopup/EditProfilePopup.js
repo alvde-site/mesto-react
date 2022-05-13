@@ -33,11 +33,6 @@ function EditProfilePopup(props) {
     });
   }
 
-  useEffect(() => {
-    setName("");
-    setDescription("");
-  }, [props.isOpen]);
-
   return (
     <PopupWithForm
       name="profile"
